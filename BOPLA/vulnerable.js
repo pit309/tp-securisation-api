@@ -59,7 +59,7 @@ app.put('/update', authenticateToken, (req, res) => {
   if (!user) return res.status(404).send('User not found');
 
   user.role = role; // ❌ N'importe quel utilisateur peut modifier le rôle d’un autre
-  res.send(`Role of ${login} updated to ${role}`);
+  res.send(`Role of ${username} updated to ${role}`);
 });
 
 app.listen(3000, () => {
