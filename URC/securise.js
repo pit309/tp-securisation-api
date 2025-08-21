@@ -4,6 +4,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const bodyParser = require('body-parser');
+const rateLimit = require('express-rate-limit');
 
 const app = express();
 app.use(bodyParser.json());
@@ -68,6 +69,16 @@ app.get('/items', authenticateToken, (req, res) => {
     data: paginated
   });
 });
+
+
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000, // 1 min
+  max: 5, // max 30 requêtes / min
+  message: 'Too many requests, try again later.'
+});
+
+app.use('/items', limiter); // Appliqué à cette route
+
 
 app.listen(3000, () => {
   console.log('🚀 Server running on http://localhost:3000');
