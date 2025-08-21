@@ -25,6 +25,12 @@ const users = [
   }
 ];
 
+const limiter = rateLimit({
+  windowMs: 5 * 1000, // 1 min
+  max: 5, // max 30 requêtes / min
+  message: 'Too many requests, try again later.'
+});
+
 // 🔐 Middleware JWT
 function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
@@ -39,6 +45,7 @@ function authenticateToken(req, res, next) {
   });
 }
 
+app.use('/login', limiter); 
 // ✅ Connexion : retourne un token
 app.post('/login', (req, res) => {
   const { username, password } = req.body;
@@ -71,13 +78,8 @@ app.get('/items', authenticateToken, (req, res) => {
 });
 
 
-const limiter = rateLimit({
-  windowMs: 1 * 60 * 1000, // 1 min
-  max: 5, // max 30 requêtes / min
-  message: 'Too many requests, try again later.'
-});
-
-app.use('/items', limiter); // Appliqué à cette route
+//app.use('/items', limiter); // Appliqué à cette route
+//app.use('/login', limiter); // Appliqué à cette route
 
 
 app.listen(3000, () => {
