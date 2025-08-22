@@ -89,6 +89,11 @@ app.get('/products', authenticateToken, (req, res) => {
     res.json(products);
 });
 
+// Liste des achats
+app.get('/orders', authenticateToken, (req, res) => {
+    res.json(orders);
+});
+
 // Fonction utilitaire pour vérifier la disponibilité du stock
 const checkAndReserveStock = (productId, quantity) => {
     const product = products.find(p => p.id === productId);
