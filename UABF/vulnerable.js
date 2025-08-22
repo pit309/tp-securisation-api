@@ -7,6 +7,7 @@ const app = express();
 app.use(express.json());
 
 const SALT_ROUNDS = 10;
+const PORT = process.env.PORT || 3000;
 
 // Base de données simulée
 let users = [];
