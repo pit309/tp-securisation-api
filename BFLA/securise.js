@@ -67,8 +67,6 @@ app.post('/login', async (req, res) => {
     const user = users.find(u => u.username === username);
     
     if (!user || !(await bcrypt.compare(password, user.password))) {
-    
-    if (!user) {
         return res.status(401).json({ message: 'Identifiants invalides' });
     }
 
