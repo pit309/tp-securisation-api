@@ -67,6 +67,7 @@ const validateUrl = (req, res, next) => {
         const parsedUrl = new URL(url);
         
         // Vérification des adresses IP privées
+        console.log(parsedUrl.hostname, dns.lookup(parsedUrl.hostname));
         if (dns.lookup(parsedUrl.hostname)) {
             return res.status(403).json({ message: 'Les adresses IP privées ne sont pas autorisées' });
         }
