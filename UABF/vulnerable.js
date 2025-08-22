@@ -51,6 +51,11 @@ app.get('/products', (req, res) => {
     res.json(products);
 });
 
+// Liste des produits
+app.get('/orders', (req, res) => {
+    res.json(orders);
+});
+
 // Vulnérabilité 1: Pas de vérification du stock en temps réel
 // Vulnérabilité 2: Pas de limitation de commandes multiples
 // Vulnérabilité 3: Pas de vérification du crédit disponible
