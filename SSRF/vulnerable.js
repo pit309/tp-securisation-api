@@ -98,7 +98,7 @@ app.post('/check-website', async (req, res) => {
 app.post('/proxy-service', async (req, res) => {
     const { service, path } = req.body;
     const url = `${service}${path}`;
-
+    console.log(`Proxying request to: ${url}`);
     try {
         const response = await axios.get(url);
         res.json(response.data);
@@ -136,7 +136,7 @@ const internalRoutes = {
 };
 
 // Route interne simulée (accessible uniquement en local normalement)
-app.get('/internal-api/', (req, res) => {
+app.get('/internal-api/user-data', (req, res) => {
     const path = req.path;
     const data = internalRoutes[path];
 

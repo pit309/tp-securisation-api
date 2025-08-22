@@ -1,0 +1,5 @@
+POST http://localhost:3000/fetch-image HTTP/1.1
+
+{
+    "imageUrl": "https://placehold.net/1.png"
+}
